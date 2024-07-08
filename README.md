@@ -23,4 +23,9 @@ spring:
     password: password
     url: jdbc:postgresql://locahost:port/database_name
     username: username
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
 ```
