@@ -25,7 +25,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/register", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(description = "Create new User", method = "POST", responses = @ApiResponse(responseCode = "201"))
     public ResponseEntity<DetailsUserDTO> createUser(@RequestBody @Valid CreateUserDTO dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.userService.save(dto));
