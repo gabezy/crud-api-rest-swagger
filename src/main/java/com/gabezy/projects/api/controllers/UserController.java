@@ -2,6 +2,8 @@ package com.gabezy.projects.api.controllers;
 
 import com.gabezy.projects.api.domain.dtos.CreateUserDTO;
 import com.gabezy.projects.api.domain.dtos.DetailsUserDTO;
+import com.gabezy.projects.api.domain.dtos.LoginDTO;
+import com.gabezy.projects.api.domain.dtos.TokenDTO;
 import com.gabezy.projects.api.services.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -15,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/users")
@@ -29,6 +32,12 @@ public class UserController {
     @Operation(description = "Create new User", method = "POST", responses = @ApiResponse(responseCode = "201"))
     public ResponseEntity<DetailsUserDTO> createUser(@RequestBody @Valid CreateUserDTO dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.userService.save(dto));
+    }
+
+    @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(description = "Generate the token")
+    public ResponseEntity<TokenDTO> login(@RequestBody @Valid LoginDTO dto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.login(dto));
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
