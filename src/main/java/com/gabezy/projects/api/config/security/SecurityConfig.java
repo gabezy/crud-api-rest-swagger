@@ -39,7 +39,8 @@ public class SecurityConfig {
                 )
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(OPENAPI_WHITELIST).permitAll() // Swagger URL
-                        .requestMatchers(HttpMethod.POST,"/users").anonymous() // only unauthenticated user can post this endpoint
+                        .requestMatchers(HttpMethod.POST,"/users/register").anonymous() // only unauthenticated user can post this endpoint
+                        .requestMatchers(HttpMethod.POST,"/users/login").anonymous()
                         .anyRequest().authenticated()
                 ).addFilterAfter(securityFilter, UsernamePasswordAuthenticationFilter.class);
 
